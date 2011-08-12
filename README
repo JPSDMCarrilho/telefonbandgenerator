@@ -1,0 +1,69 @@
+
+
+ STEFAN SCHLESINGER's TELEFONBAND GENERATOR v1
+
+
+ This code is public domain. I'd be glad to hear from you if you like it. Write
+ an e-mail to sts <at> ono <dot> at. :-)
+
+
+ This is a small shell script I created, when I had to change our PBX's
+ telefonbands the third time. It will create MP3's which you can use as
+ telefonband from a textfile, by  using OSX's build in TTS engine.
+
+ You should run it on Lion, with a couple of Voices installed, see the next
+ section for detailed information. The TTS voices on previous OSX versions
+ suck.
+
+
+ PREREQUISITE
+ 
+   Install the following tools via homebrew:
+
+       libmad
+       sox
+       lame
+
+   Download the following TTS voices to your OSX (System Settings -> Speech):
+   Steffi, Samantha, Virginie.
+
+   Place a file called 'loop.mp3', a 'mono' channel background music file, with
+   a samplerate of 22050 Hz in this directory.
+   Audacity comes in handy when you need to cut and sample it correctly.
+
+
+ USAGE
+
+   Create your voice texts in the text/ directory. One text by file, with the
+   following naming schema: $title-$lang.txt, eg. closed-en.txt or
+   waiting-de.txt.
+
+   Simple Example
+
+     Make sure to add a couple of seconds of silence before and after the text,
+     so the caller will here the whole message.
+
+     [[slnc 3000]]
+     Unfortunately, all our lines are busy at the moment. Please
+     try again later or send us an  email to: [[ctxt WORD]]example, @ example
+     dot com.[[ctxt NORM]], and we will get back to you as soon as possible.
+
+     Thank you, Goodbye!
+     [[slnc 2000]]
+
+   Example waiting loop (speech every 15secs, otherwise music):
+
+     [[slnc 5000]]
+     One moment please, the next free line is reserved for you.
+     [[slnc 15000]]
+     All our lines are busy at the moment, please hold the line.
+     [[slnc 10000]]
+
+  Now run ./telefonbandgenerator.sh and check for the output in the out/
+  directory.
+
+
+ AUTHOR
+
+  Stefan Schlesinger
+
